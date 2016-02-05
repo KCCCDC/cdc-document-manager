@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(isset($_SESSION['user'])){
+        header('Location: /files.php');
+    }
+
+?>
+
 <html>
     <body>
     <div>
@@ -10,4 +18,5 @@
                 <input type="submit" value="Log in">
         </form>
     </div>
-    </body>           
+    </body>
+</html>
