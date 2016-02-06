@@ -12,6 +12,6 @@
         readfile($file);
         exit;
     }else{
-        header('Locatin: /files.php');
+        header('Location: /files.php');
     }
 ?>
