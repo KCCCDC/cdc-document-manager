@@ -5,7 +5,7 @@
         echo("<form action='download.php' method='post'> ");
         foreach($directory as $child){
             if(!is_dir($parentPath . $child)){
-                echo($child . "<input type='radio' name='file' value=' " . $child . " ' >" . "<br>");
+                echo($child . "<input type='radio' name='file' value=' " . $parentPath . $child . " ' >" . "<br>");
             }else{
                 array_push($leftNode, $child);
             }
