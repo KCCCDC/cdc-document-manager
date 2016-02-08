@@ -1,12 +1,13 @@
 <?php
     function  printFiles($parentPath){
+        #include 'auth.php';
         $directory = array_diff(scandir($parentPath), array('..', '.'));
         $leftNode[] = NULL;
         global $dirList;
         echo("<form action='download.php' method='post'> ");
         foreach($directory as $child){
             if(!is_dir($parentPath . $child)){
-                echo($child . "<input type='radio' name='file' value='" . hash('sha256', $parentPath . $child) . "'>" . "<br>");
+                if(auth('file', $_SESSION['user'], $parentPath . $child )) echo($child . "<input type='radio' name='file' value='" . hash('sha256', $parentPath . $child) . "'>" . "<br>");
             }else{
                 array_push($leftNode, $child);
             }
@@ -32,9 +33,12 @@
         echo("<input type='submit' value='Upload'> ");
         echo("</form>");
     }
+
+
     
     session_start();
     $fileStorage = '/srv/files/';
+    include 'auth.php';
     if(isset($_SESSION['user'])){
         echo('Welcome ' . $_SESSION['user'] . "<br>");
         echo("You are Logged In!" . "<br>");
