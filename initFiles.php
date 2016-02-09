@@ -24,6 +24,7 @@
         $insert->execute();
         include 'closeDB.php';
     }
-    grabFiles("/srv/files/");
+    include 'config.php';
+    grabFiles($fileStorageDirectory);
     echo('DONE!');
 ?>

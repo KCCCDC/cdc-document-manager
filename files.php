@@ -37,8 +37,9 @@
 
     
     session_start();
-    $fileStorage = '/srv/files/';
+    include 'config.php';
     include 'auth.php';
+    $fileStorage = $fileStorageDirectory;
     if(isset($_SESSION['user'])){
         echo('Welcome ' . $_SESSION['user'] . "<br>");
         echo("You are Logged In!" . "<br>");
