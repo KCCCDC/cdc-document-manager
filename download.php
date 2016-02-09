@@ -12,8 +12,6 @@
     session_start();
     if(isset($_SESSION['user']) && isset($_POST['file']) ){
         $file = getFile($_POST['file']);
-        
-        $file = getFile($_POST['file']);
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="'.basename($file).'"');

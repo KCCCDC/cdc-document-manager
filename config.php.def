@@ -1,5 +1,5 @@
 <?php
     $databaseLocation = 'PATH_TO_DATABASE';
     $fileStorageDirectory = 'PATH_TO_PARENT_FILE_FOLDER';
-
+    $maxUploadSize=2097152; //2MB
 ?>

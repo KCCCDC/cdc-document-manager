@@ -32,7 +32,7 @@
         echo("<select name='dir'> ");
         foreach($dirArray as $dir){
             if(auth('dir', $_SESSION['user'], $dir)){
-                echo("<option value='" . $dir . "'> " . basename($dir) . "</option>");
+                echo("<option value='" . hash('sha256', $dir) . "'> " . basename($dir) . "</option>");
             }
         }
         echo("</select><br>");
@@ -40,8 +40,6 @@
         echo("<input type='submit' value='Upload'> ");
         echo("</form>");
     }
-
-
     
     session_start();
     include 'config.php';
