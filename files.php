@@ -1,35 +1,42 @@
 <?php
     function  printFiles($parentPath){
-        #include 'auth.php';
         $directory = array_diff(scandir($parentPath), array('..', '.'));
         $leftNode[] = NULL;
         global $dirList;
         echo("<form action='download.php' method='post'> ");
+        $hasFiles=0;
         foreach($directory as $child){
             if(!is_dir($parentPath . $child)){
-                if(auth('file', $_SESSION['user'], $parentPath . $child )) echo($child . "<input type='radio' name='file' value='" . hash('sha256', $parentPath . $child) . "'>" . "<br>");
+                if(auth('file', $_SESSION['user'], $parentPath . $child )){
+                    if(!$hasFiles) echo("-----" . basename($parentPath) . "-----<br>");
+                    echo($child . "<input type='radio' name='file' value='" . hash('sha256', $parentPath . $child) . "'>" . "<br>");
+                    $hasFiles=1;
+                }
             }else{
                 array_push($leftNode, $child);
             }
         }
-        echo("<input type='submit' value='Download''>");
+        if($hasFiles) echo("<input type='submit' value='Download''>");
         echo("</form>");
         foreach($leftNode as $dir){
             if($dir!=NULL){
                 array_push($dirList, $parentPath . $dir . '/');
-                echo("-----" . $dir . "-----<br>");
                 printFiles($parentPath . $dir . '/');
             
             }
         }
     }
     function printUpload($dirArray){
-        echo("<form action='upload.php' method='post'> ");
+        echo("<br><br>-----Upload-----");
+        echo("<form action='upload.php' method='post' enctype='multipart/form-data'> ");
         echo("<select name='dir'> ");
         foreach($dirArray as $dir){
-            echo("<option value='" . $dir . "'> " . basename($dir) . "</option>");
+            if(auth('dir', $_SESSION['user'], $dir)){
+                echo("<option value='" . $dir . "'> " . basename($dir) . "</option>");
+            }
         }
-        echo("</select>");
+        echo("</select><br>");
+        echo("<input type='file' name='uploadFile'><br>");
         echo("<input type='submit' value='Upload'> ");
         echo("</form>");
     }
