@@ -52,6 +52,7 @@
         $dirList[] = NULL;
         printFiles($fileStorage);
         printUpload($dirList);
+        echo("<a href=logout.php>Logout</a>");
     }else{
         header('Location: /index.php');
     }

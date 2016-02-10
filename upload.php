@@ -34,9 +34,8 @@
         if(empty($errors)==true){
             move_uploaded_file($file_tmp, $uploadDir . $file_name);
             insertFile($uploadDir . $file_name);
-            header("Location: /files.php");
         
         }
     }
-
+    header("Location: /files.php");
 ?>
