@@ -45,6 +45,10 @@
     include 'config.php';
     include 'auth.php';
     $fileStorage = $fileStorageDirectory;
+    if(isset($_SESSION['time']) && (time() - $_SESSION['time'] > $maxSessionTime )){
+        header('Location: /logout.php');
+        exit;
+    }
     if(isset($_SESSION['user'])){
         echo('Welcome ' . $_SESSION['user'] . "<br>");
         echo("You are Logged In!" . "<br>");

@@ -9,6 +9,7 @@
         $login = password_verify($_POST['passwd'], $result['pass']);
         if($login == 1){
             $_SESSION['user'] = $username;
+            $_SESSION['time'] = time();
         }
     }
 ?>    
