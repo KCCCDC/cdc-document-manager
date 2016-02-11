@@ -2,7 +2,7 @@
 <?php
     session_start();
     if(isset($_POST['user']) && isset($_POST['passwd']) ){
-        $username = $_POST['user'];
+        $username = strtolower($_POST['user']);
         $query = $db->prepare('select * from users where username=:username');
         $query->execute(array(':username' => $username));
         $result = $query->fetch(PDO::FETCH_ASSOC);
