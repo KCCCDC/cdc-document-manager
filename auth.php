@@ -12,7 +12,8 @@
         $users = explode(",", $result['users']);
         foreach($users as $person){
             if($person == $user) return 1;
-        }     
+        }
+        return 0;
         include 'closeDB.php';
     }
 ?>

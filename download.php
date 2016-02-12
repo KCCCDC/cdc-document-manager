@@ -10,8 +10,10 @@
     }
 
     session_start();
+    include 'auth.php';
     if(isset($_SESSION['user']) && isset($_POST['file']) ){
         $file = getFile($_POST['file']);
+        if(!auth('file', $_SESSION['user'], $file)) header('Location: /logout.php');
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="'.basename($file).'"');

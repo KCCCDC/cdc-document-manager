@@ -21,8 +21,9 @@
     session_start();
     if(isset($_SESSION['user']) && isset($_POST['dir']) ){
         include 'config.php';
+        include 'auth.php';
         $uploadDir = getDir($_POST['dir']);
-
+        if(!auth('dir', $_SESSION['user'], $uploadDir)) header('Location: /logout.php');
         $errors = array();
         $file_name = $_FILES['uploadFile']['name'];
         $file_size =$_FILES['uploadFile']['size'];
